@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CardCurrencyConverterComponent } from './card-currency-converter/card-currency-converter.component';
-import { convertCurrency } from 'src/services/exchange-rate.service';
+import { ExchangeRateService } from 'src/services/exchange-rate.service';
 import { TestBed } from '@angular/core/testing';
 
 @Component({
@@ -11,7 +11,9 @@ import { TestBed } from '@angular/core/testing';
 
 
 export class AppComponent {
-  title = 'card-currency-converter';
 
-  test: any = convertCurrency().then(v => {this.test = v})
+  title = 'card-currency-converter';
+ 
+
+  //test: any = convertCurrency("jpy").then(v => {this.test = v})
 }
