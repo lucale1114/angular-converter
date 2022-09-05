@@ -18,6 +18,15 @@ let url =
       }
     }
 
+@Injectable({providedIn: 'root'})
+export class CurrentCurrencies {
+    constructor(private httpClient: HttpClient) { }
+    
+      get(): Observable<Object> {
+        return this.httpClient.get("https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies.json");
+      }
+}
+
 
 
 // let url =

@@ -5,16 +5,16 @@
     <input type="text" placeholder="Pick one" aria-label="Number" matInput [matAutocomplete]="auto"
         formControlName="fromCurrency">
     <mat-autocomplete #auto="matAutocomplete">
-        <mat-option *ngFor="let v of conversions | keyvalue " [value]="v.key">
-            {{v.value}}
+        <mat-option *ngFor="let v of filteredOptions | async" [value]="v">
+            {{v}}
         </mat-option>
     </mat-autocomplete>
 
     <input type="text" placeholder="Pick one" aria-label="Number" matInput [matAutocomplete]="auto"
         formControlName="toCurrency">
     <mat-autocomplete #auto="matAutocomplete">
-        <mat-option *ngFor="let v of conversions | keyvalue " [value]="v.key">
-            {{v.value}}
+        <mat-option *ngFor="let v of filteredOptions2 | async" [value]="v">
+            {{v}}
         </mat-option>
     </mat-autocomplete>
 
