@@ -1,0 +1,133 @@
+@use '@angular/material' as mat;
+@import '@angular/material/theming';
+@include mat.core();
+$supp-ui-primary:       mat.define-palette(mat.$cyan-palette, 800, 900, A100);
+$supp-ui-accent:        mat.define-palette(mat.$cyan-palette, 900);
+$supp-ui-warn:          mat.define-palette(mat.$red-palette);
+$supp-ui-theme: mat.define-light-theme($supp-ui-primary, $supp-ui-accent, $supp-ui-warn);
+.primary-foreground{
+    $primary: mat-color($supp-ui-primary);
+    --primary: #{$primary};
+    color: var(--primary) !important
+}
+@include mat.all-component-themes($supp-ui-theme);
+
+@mixin mix-app-theme($supp-ui-theme) {
+    $primary: mat-color($supp-ui-primary);
+    $accent: mat-color($supp-ui-accent);
+    $warn: mat-color($supp-ui-warn);
+    .mat-button-toggle-checked button {
+        background-color: #ddf0ee;
+        color: var(--primary);
+    }
+    mat-button-toggle-group {
+        height: min-content;
+        font-weight: 500;
+        border: 0px !important;
+        outline: 0px !important;
+        mat-button-toggle {
+            height: min-content;
+        }
+        mat-button-toggle:not(:first-child, :last-child) {
+            border-left: lightgray 1px solid !important;
+            border-right: lightgray 1px solid !important;
+            border-bottom: lightgray 2px solid !important;
+            border-top: lightgray 2px solid !important;
+        }
+        mat-button-toggle:first-child {
+            border-right: lightgray 1px solid !important;
+            border-left: lightgray 2px solid !important;
+            border-bottom: lightgray 2px solid !important;
+            border-top: lightgray 2px solid !important;
+            border-top-left-radius: 5px !important;
+            border-bottom-left-radius: 5px !important;
+            * {
+                border-top-left-radius: 5px !important;
+                border-bottom-left-radius: 5px !important;
+            }
+        }
+        mat-button-toggle:last-child {
+            border-left: lightgray 1px solid !important;
+            border-right: lightgray 2px solid !important;
+            border-bottom: lightgray 2px solid !important;
+            border-top: lightgray 2px solid !important;
+            border-top-right-radius: 5px !important;
+            border-bottom-right-radius: 5px !important;
+            * {
+                border-top-right-radius: 5px !important;
+                border-bottom-right-radius: 5px !important;
+            }
+        }
+    }
+
+    input.compactInput, mat-select.compactInput,
+    .compactInput > * > input, .compactInput > * > mat-select {
+        background-color: white !important;
+        border-radius: 4px !important;
+        border: lightgray 1px solid !important;
+        padding: 0.3em !important;
+        margin: 1px !important;
+    }
+    
+    input.compactInput.ng-dirty.ng-invalid, mat-select.compactInput.ng-dirty.ng-invalid,
+    .compactInput > * > input.ng-dirty.ng-invalid, .compactInput > * > mat-select.ng-dirty.ng-invalid {
+        --warn: #{$warn};
+        border: var(--warn) 2px solid !important;
+        color: var(--warn);
+        margin: 0px !important;
+    }
+    
+    input.compactInput:focus, mat-select.compactInput:focus,
+    .compactInput > * > input:focus, .compactInput > * > mat-select:focus {
+        --primary: #{$primary};
+        --warn: #{$warn};
+        border: var(--primary) 2px solid !important;
+        margin: 0px !important;
+        .dirty.ng-invalid {
+            border: var(--warn) 2px solid !important;
+            color: var(--warn);
+            margin: 0px !important;
+        }
+    }
+    
+    input.compactInput:hover:not(:focus), mat-select.compactInput:hover:not(:focus),
+    .compactInput > * > input:hover:not(:focus), .compactInput > * > mat-select:hover:not(:focus) {
+        --warn: #{$warn};
+        border: dimgray 2px solid !important;
+        margin: 0px !important;
+        .dirty.ng-invalid {
+            border: var(--warn) 2px solid !important;
+            color: var(--warn);
+            margin: 0px !important;
+        }
+    }
+
+    .mat-form-field[dense] {
+        .mat-form-field-flex > .mat-form-field-infix {
+            padding: 0.4em 0px !important;
+        }
+        .mat-form-field-label-wrapper {
+            top: -1.5em;
+        }
+        &.mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+            transform: translateY(-1.1em) scale(.75);
+        }
+        .mat-form-field-wrapper{
+            padding-bottom: 0.8em;
+        }
+        * > [matSuffix] {
+            height: 2em !important;
+            width: 2em !important;
+            font-size: 1em !important;
+            line-height: 1em !important;
+            top: -0.1em;
+            right: -0.4em;
+        }
+    }
+    
+    .heavier-font {
+        font-weight: 500;
+    }
+}
+
+@include mix-app-theme($supp-ui-theme);
