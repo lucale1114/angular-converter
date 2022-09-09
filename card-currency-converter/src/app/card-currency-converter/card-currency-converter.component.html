@@ -1,77 +1,88 @@
 <form [formGroup]="formGroup" (ngSubmit)="convertCurrency()">
-  <div id="splitter">
-    <div class="binder">
-      <mat-form-field appearance="outline" class="textBox">
-        <!-- <mat-label> Mängd </mat-label> -->
-        <input matInput formControlName="amount" />
-      </mat-form-field>
+    <div id="splitter">
+        <div class="binder">
+            <mat-form-field appearance="outline" class="textBox">
+                <input matInput formControlName="amount" />
+            </mat-form-field>
 
-      <div class="aligner">
-        <mat-form-field appearance="outline" class="select">
-          <mat-label> Från </mat-label>
-          <mat-select
-            formControlName="fromCurrency"
-            #singleSelect
-            (selectionChange)="selectChanged()">
-            <mat-option>
-              <ngx-mat-select-search
-                [formControl]="filterOptionsFrom"
-                placeholderLabel="Value">
-              </ngx-mat-select-search>
-            </mat-option>
-            <mat-option *ngFor="let v of filteredOptions | async" [value]="v">
-              <div class="mat-select-search-custom-header-content">{{ v }}</div>
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <h5>{{ displayFrom }}</h5>
-      </div>
-    </div>
+            <div class="aligner">
+                <mat-form-field appearance="outline" class="select">
+                    <mat-label> {{ 'converter.from' | translate }} </mat-label>
+                    <!-- <mat-label> Från </mat-label> -->
+                    <mat-select
+                        formControlName="fromCurrency"
+                        #singleSelect
+                        (selectionChange)="selectChanged()"
+                    >
+                        <mat-option>
+                            <ngx-mat-select-search
+                                [formControl]="filterOptionsFrom"
+                                placeholderLabel="Value"
+                            >
+                            </ngx-mat-select-search>
+                        </mat-option>
+                        <mat-option
+                            *ngFor="let v of filteredOptions | async"
+                            [value]="v"
+                        >
+                            <div
+                                class="mat-select-search-custom-header-content"
+                            >
+                                {{ v }}
+                            </div>
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <h5>{{ displayFrom }}</h5>
+            </div>
+        </div>
 
- 
-    <button id="swap" *ngIf="!noValues; else inactive" (click)="swapCurrencies()">
-        <mat-icon id="activeButton">swap_vert</mat-icon>
-      <!-- <img src="../../assets/icons/swap.svg" /> -->
-      <h3 id="activeText">BYT</h3>
-    </button>
-
-    <ng-template #inactive>
-        <button id="swap" class="inactiveButton" disabled>
+        <button
+            mat-button
+            color="primary"
+            [disabled]="noValues"
+            (click)="swapCurrencies()"
+        >
             <mat-icon>swap_vert</mat-icon>
-            <!-- <img src="../../assets/icons/swap.svg"/> -->
-            <h3>BYT</h3>
-          </button>
-    </ng-template>
+            <!-- BYT -->
+            {{ 'converter.switch' | translate }}
+        </button>
 
-    <div class="binder">
-      <mat-form-field appearance="outline" class="textBox">
-        <!-- <mat-label> Mängd</mat-label> -->
-        <input matInput disabled [value]="result" id="output" />
-      </mat-form-field>
+        <div class="binder">
+            <mat-form-field appearance="outline" class="textBox">
+                <input matInput disabled [value]="result" id="output" />
+            </mat-form-field>
 
-      <div class="aligner">
-        <mat-form-field appearance="outline" class="select">
-          <mat-label> Till </mat-label>
-          <mat-select
-            formControlName="toCurrency"
-            #singleSelect
-            (selectionChange)="selectChanged()">
-            <mat-option>
-              <ngx-mat-select-search
-                [formControl]="filterOptionsTo"
-                placeholderLabel="Value">
-              </ngx-mat-select-search>
-            </mat-option>
-            <mat-option *ngFor="let v of filteredOptions2 | async" [value]="v">
-              <div class="mat-select-search-custom-header-content">{{ v }}</div>
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <h5>{{ displayTo }}</h5>
-      </div>
+            <div class="aligner">
+                <mat-form-field appearance="outline" class="select">
+                    <mat-label> {{ 'converter.to' | translate}} </mat-label>
+                    <!-- <mat-label> Till </mat-label> -->
+                    <mat-select
+                        formControlName="toCurrency"
+                        #singleSelect
+                        (selectionChange)="selectChanged()"
+                    >
+                        <mat-option>
+                            <ngx-mat-select-search
+                                [formControl]="filterOptionsTo"
+                                placeholderLabel="Value"
+                            >
+                            </ngx-mat-select-search>
+                        </mat-option>
+                        <mat-option
+                            *ngFor="let v of filteredOptions2 | async"
+                            [value]="v"
+                        >
+                            <div
+                                class="mat-select-search-custom-header-content"
+                            >
+                                {{ v }}
+                            </div>
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <h5>{{ displayTo }}</h5>
+            </div>
+        </div>
     </div>
-  </div>
-  <!-- <button class="button" mat-flat-button color="primary" type="submit">
-    Konvertera
-  </button> -->
 </form>

@@ -1,49 +1,35 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, OnInit } from '@angular/core';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 
-let url =
-    'https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/eur/jpy.json';
+@Injectable({ providedIn: 'root' })
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export class ExchangeRateService {
+    constructor(private httpClient: HttpClient) {}
 
-@Injectable({providedIn: 'root'})
-    export class ExchangeRateService {
-    
-      constructor(private httpClient: HttpClient) { }
-    
-      get(fromCurrency : any, toCurrency : any): Observable<Object> {
+    get(fromCurrency: string | null | undefined, toCurrency: string | null | undefined): Observable<object> {
         console.log(fromCurrency);
         console.log(toCurrency);
-        return this.httpClient.get("https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/" + fromCurrency + "/" + toCurrency + ".json");
-      }
+        return this.httpClient.get(
+            'https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/' +
+                fromCurrency +
+                '/' +
+                toCurrency +
+                '.json',
+        );
     }
-
-@Injectable({providedIn: 'root'})
-export class CurrentCurrencies {
-    constructor(private httpClient: HttpClient) { }
-    
-      get(): Observable<Object> {
-        return this.httpClient.get("https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies.json");
-      }
 }
 
+@Injectable({ providedIn: 'root' })
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export class CurrentCurrencies {
+    constructor(private httpClient: HttpClient) {}
 
-
-// let url =
-//   'https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/eur/jpy.json';
-// let urlNotSet =
-//   'https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/';
-    
-// export function convertCurrency(toCurrency: string): Promise<number> {
-//   return fetch(url)
-//     .then((res) => {
-//      if (!res.ok) {
-//             throw new Error(res.statusText)
-//       }
-//       return res.json();
-//     })
-//     .then((res) => {
-//       console.log(res[toCurrency]);
-//       return res[toCurrency];
-//     })
-// }
+    get(): Observable<object> {
+        return this.httpClient.get(
+            'https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies.json',
+        );
+    }
+}
